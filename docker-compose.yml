@@ -1,17 +1,18 @@
 version: '2'
 services:
       gpsi_bpm_db:
-            image: sameersbn/mysql
-            container_name: gpsi-dev-bpm-db
+            image: mariadb
+            container_name: gpsi-bpm-db
             ports:
                   - "3306:3306"
             environment:
-                  - DB_USER=gpsi_bpm_user
-                  - DB_PASS=gpsi_bpm_pass
-                  - DB_NAME=gpsi_bpm_db
+                  - MYSQL_ROOT_PASSWORD=root
+                  - MYSQL_USER=gpsi_bpm_user
+                  - MYSQL_PASSWORD=gpsi_bpm_pass
+                  - MYSQL_DATABASE=gpsi_bpm
       gpsi_bpm:
             image: eternnoir/activiti
-            container_name: gpsi-dev-bpm
+            container_name: gpsi-bpm
             ports:
                   - "8080:8080"
             volumes: 
@@ -22,6 +23,6 @@ services:
                   - MYSQL_PORT_3306_TCP_PORT=3306
                   - MYSQL_ENV_DB_USER=gpsi_bpm_user
                   - MYSQL_ENV_DB_PASS=gpsi_bpm_pass
-                  - MYSQL_ENV_DB_NAME=gpsi_bpm_db
+                  - MYSQL_ENV_DB_NAME=gpsi_bpm
             depends_on:
                   - gpsi_bpm_db

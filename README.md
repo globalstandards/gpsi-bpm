@@ -1,2 +1,1 @@
-# gpsi-bpm-server
-GPSI BPM Server
+Apache camel lo que hace es reestablecer los procesos
